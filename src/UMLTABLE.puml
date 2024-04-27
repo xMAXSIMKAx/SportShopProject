@@ -1,0 +1,74 @@
+@startuml
+class org.example.app.sportshoponline.SportShopOnlineApplication {
++ {static} void main(String[])
+}
+
+class org.example.app.sportshoponline.service.OrderService {
+- DbService dbService
++ void placeOrder(Order)
++ void cancelOrder(int)
++ List<org.springframework.core.annotation.Order> getUserOrders(int)
+}
+
+
+class org.example.app.sportshoponline.service.AdminService {
+- DbService dbService
++ void modifyContent(Content)
++ void addUser(SecurityProperties.User)
+}
+
+
+class org.example.app.sportshoponline.service.DbService {
++ void save(Object)
++ void update(Object)
++ void delete(Class<?>,int)
++ List<?> search(Class<?>,String)
++ List<Order> getUserOrders(int)
+}
+
+class org.example.app.sportshoponline.entity.User {
+- int id
+- String username
+- String password
+}
+
+class org.example.app.sportshoponline.entity.Order {
+- int id
+- int userId
+}
+
+class org.example.app.sportshoponline.content.Content {
+}
+class org.example.app.sportshoponline.service.AuthService {
+- DbService dbService
++ boolean authenticateUser(String,String)
++ boolean isAdmin(int)
+}
+
+
+class org.example.app.sportshoponline.product.Product {
+- int id
+- String name
+- String description
+- double price
+- boolean isDiscount
+}
+
+class org.example.app.sportshoponline.service.CatalogService {
+- DbService dbService
++ void saveProduct(Product)
++ void updateProduct(Product)
++ void deleteProduct(int)
++ List<Product> searchProducts(String)
+}
+
+
+class org.example.app.sportshoponline.service.NotifyService {
+- DbService dbService
++ void sendSMS(String,String)
++ void sendEmail(String,String,String)
++ void sendNotification(SecurityProperties.User,String)
+}
+
+
+@enduml
